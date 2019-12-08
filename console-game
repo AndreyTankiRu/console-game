@@ -1,0 +1,123 @@
+class Map:
+map_ = [[]]
+def Generate(self, maparr=[], n=10):
+for i in range(n):
+for o in range(n):
+maparr[o][i] = '+'
+maparr.append([])
+maparr[0][0] = '0'
+return maparr
+def __init__(self):
+self.map_ = self.Generate()
+def PrintMap(self):
+for i in self.map_:
+stroka = ''
+for n in i:
+stroka += n
+print(stroka)
+
+class Entity:
+m = Map()
+map_ = m.map_
+x, y = 0, 0
+def __init__(self, hp=50, agility=2, armor=10, damage=10):
+self.hp = hp
+self.agility = agility
+self.armor = armor
+self.damage = damage
+
+def MoveByX(self, chr, step=1):
+mapp = self.mapp
+if chr == 'w':
+if self.x == 0:
+mapp[9][self.y] = '0'
+mapp[0][self.y] = '+'
+self.x = 9
+else:
+mapp[self.x - step][self.y] = '0'
+mapp[self.x][self.y] = '+'
+self.x -= step
+if self.x == 9:
+mapp[0][self.y] = '0'
+mapp[-1][self.y] = '+'
+self.x = 0
+else:
+mapp[self.x + step][self.y] = '0'
+mapp[self.x][self.y] = '+'
+self.x += step
+self.m.PrintMap(self.m)
+def MoveByY(self, chr, step=1):
+mapp = self.map_
+if chr == 'a':
+if self.y == 0:
+mapp[self.x][9] = '0'
+mapp[self.x][0] = '+'
+self.y = 9
+else:
+mapp[self.x][self.y - step] = '0'
+mapp[self.x][self.y] = '+'
+self.y -= step
+if self.y == 9:
+mapp[self.x][0] = '0'
+mapp[self.x][9] = '+'
+else:
+mapp[self.x][self.y + step] = '0'
+mapp[self.x][self.y] = '+'
+self.y += step
+self.m.PrintMap(self.m)
+class Warrior:
+m = Map()
+map_ = m.map_
+x, y = 0, 0
+def __init__(self, hp=20, agility=10, armor=10, damage=15):
+self.hp = hp
+self.agility = agility
+self.armor = armor
+self.damage = damage
+class Witch:
+m = Map()
+map_ = m.map_
+x, y = 0, 0
+def __init__(self, hp=30, agility=5, armor=0, damage=15):
+self.hp = hp
+self.agility = agility
+self.armor = armor
+self.damage = damage
+class Shooter:
+m = Map()
+map_ = m.map_
+x, y = 0, 0
+def __init__(self, hp=15, agility=10, armor=5, damage=20):
+self.hp = hp
+self.agility = agility
+self.armor = armor
+self.damage = damage
+class Tank:
+m = Map()
+map_ = m.map_
+x, y = 0, 0
+def __init__(self, hp=150, agility=1, armor=40, damage=7):
+self.hp = hp
+self.agility = agility
+self.armor = armor
+self.damage = damage
+
+class Weapon:
+weapon1 = ("Короткий меч", 2, 7)
+weapon2 = ("Длинный меч", 5, 15)
+weapon3 = ("Лук", 9, 20)
+weapon4 = ("посох мага", 10, 15)
+def __init__(self, name, damage, range):
+self.name, self.damage, self.range = name, damage, range
+
+def hit(self, actor, target):
+if not target.is_alive():
+print('Враг уже повержен')
+else:
+x1, y1 = actor.get_coords()
+x2, y2 = target.get_coords()
+if ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5 > self.range:
+print('Враг слишком далеко для оружия {self.name}')
+else:
+print('Врагу нанесен урон оружием {self.name} в размере {self.damage}')
+
